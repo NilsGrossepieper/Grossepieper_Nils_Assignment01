@@ -179,8 +179,29 @@ The order of observations is reasonable. \
 The .csv-file company_info.csv contains additional information on the ten companies from a different
 source. Read the file into your environment as a data frame named company_info. \
 
+```{r, warning=FALSE, message=FALSE}
+# Read in the data "company info":
+company_info <- read_csv2("data/company_info.csv", na = c("", "NA"), skip = 1)
+
+```
+\
 
 
+##### __7. Exercise:__
+
+Is this a tidy data set? Why (not)? \
+
+##### __Answer:__
+
+1. Each variable forms a column. \
+This condition is fulfilled since you have five variables and each is in its 
+own column. \
+2. Each observation forms a row. \
+This condition is also fulfilled, since we have ten companies (observations)
+and each of them has its own row. \
+3. Each type of observational unit forms a table. \
+Also the last condition is fulfilled. \
+\
 
 
 

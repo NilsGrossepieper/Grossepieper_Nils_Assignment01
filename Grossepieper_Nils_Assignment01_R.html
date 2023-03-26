@@ -590,6 +590,32 @@ The order of observations is reasonable.<br />
 ten companies from a different source. Read the file into your
 environment as a data frame named company_info.<br />
 </p>
+<pre class="r"><code># Read in the data &quot;company info&quot;:
+company_info &lt;- read_csv2(&quot;data/company_info.csv&quot;, na = c(&quot;&quot;, &quot;NA&quot;), skip = 1)</code></pre>
+<p><br />
+</p>
+</div>
+<div id="exercise-6" class="section level5">
+<h5><strong>7. Exercise:</strong></h5>
+<p>Is this a tidy data set? Why (not)?<br />
+</p>
+</div>
+<div id="answer-2" class="section level5">
+<h5><strong>Answer:</strong></h5>
+<ol style="list-style-type: decimal">
+<li>Each variable forms a column.<br />
+This condition is fulfilled since you have five variables and each is in
+its own column.<br />
+</li>
+<li>Each observation forms a row.<br />
+This condition is also fulfilled, since we have ten companies
+(observations) and each of them has its own row.<br />
+</li>
+<li>Each type of observational unit forms a table.<br />
+Also the last condition is fulfilled.<br />
+<br />
+</li>
+</ol>
 </div>
 </div>
 
