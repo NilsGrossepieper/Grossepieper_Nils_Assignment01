@@ -63,8 +63,10 @@ tidy data format. \
 Make the transformations needed so that the data can be described as “tidy” \
 
 ```{r}
-# Have a look at the data set:
+# Have a look at the three data sets:
 head(financials_annual, 10)
+company_codes
+item_codes
 ```
 
 ```{r, results='hide', warning=FALSE}
@@ -262,31 +264,3 @@ head(final_data_set, 10)
 tail(final_data_set, 10)
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

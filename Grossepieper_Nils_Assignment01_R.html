@@ -417,7 +417,7 @@ is not in the tidy data format.<br />
 <p>Make the transformations needed so that the data can be described as
 “tidy”<br />
 </p>
-<pre class="r"><code># Have a look at the data set:
+<pre class="r"><code># Have a look at the three data sets:
 head(financials_annual, 10)</code></pre>
 <pre><code>## # A tibble: 10 × 21
 ##    Code    `2000` `2001` `2002` `2003` `2004` `2005` `2006` `2007` `2008` `2009`
@@ -435,6 +435,28 @@ head(financials_annual, 10)</code></pre>
 ## # … with 10 more variables: `2010` &lt;chr&gt;, `2011` &lt;chr&gt;, `2012` &lt;chr&gt;,
 ## #   `2013` &lt;dbl&gt;, `2014` &lt;dbl&gt;, `2015` &lt;chr&gt;, `2016` &lt;chr&gt;, `2017` &lt;chr&gt;,
 ## #   `2018` &lt;dbl&gt;, `2019` &lt;dbl&gt;</code></pre>
+<pre class="r"><code>company_codes</code></pre>
+<pre><code>## # A tibble: 10 × 2
+##    company_code company_name      
+##    &lt;chr&gt;        &lt;chr&gt;             
+##  1 @GOOGL       ALPHABET INC      
+##  2 @AAPL        APPLE INC         
+##  3 @FB          FACEBOOK INC      
+##  4 @AMZN        AMAZON.COM INC    
+##  5 U:T          AT&amp;T INC          
+##  6 U:ORCL       ORACLE CORPORATION
+##  7 U:SPOT       SPOTIFY TECHNO    
+##  8 U:TWTR       TWITTER INC       
+##  9 @NFLX        NETFLIX INC       
+## 10 U:BABA       ALIBABA GROUP</code></pre>
+<pre class="r"><code>item_codes</code></pre>
+<pre><code>## # A tibble: 4 × 2
+##   item_code item_descr  
+##   &lt;chr&gt;     &lt;chr&gt;       
+## 1 WC18191   ebit        
+## 2 WC02999   total_assets
+## 3 WC07250   net_income  
+## 4 WC01451   income_taxes</code></pre>
 <pre class="r"><code># Take a look at the data set:
 glimpse(financials_annual)
 
@@ -683,6 +705,57 @@ head(company_info, 10)</code></pre>
 ## # … with abbreviated variable name ¹​headquarters</code></pre>
 <p><br />
 </p>
+</div>
+<div id="exercise-9" class="section level5">
+<h5><strong>10. Exercise:</strong></h5>
+<p>Join the two data sets such that all observations in the financial
+data are kept and the additional information from company_info is
+appended<br />
+</p>
+<pre class="r"><code># Now I join the two data sets:
+final_data_set &lt;- left_join(annual_finances, company_info, by = &quot;company_name&quot;)</code></pre>
+<p><br />
+</p>
+</div>
+<div id="exercise-10" class="section level5">
+<h5><strong>11. Exercise:</strong></h5>
+<p>Print the first ten and the last ten observations of the joined data
+set.<br />
+</p>
+<pre class="r"><code># The first ten observations:
+head(final_data_set, 10)</code></pre>
+<pre><code>## # A tibble: 10 × 9
+##    company_name Year  ebit    total_as…¹ net_i…² incom…³ prima…⁴ sic_d…⁵ headq…⁶
+##    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
+##  1 ALPHABET INC 2000  &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;       7374 Servic… Mounta…
+##  2 ALPHABET INC 2001  11826   84457      6985    3083       7374 Servic… Mounta…
+##  3 ALPHABET INC 2002  187485  291192     99656   85259      7374 Servic… Mounta…
+##  4 ALPHABET INC 2003  348585  2306507    105648  241006     7374 Servic… Mounta…
+##  5 ALPHABET INC 2004  651096  3301761    399119  251115     7374 Servic… Mounta…
+##  6 ALPHABET INC 2005  2142453 10271813   1465397 676280     7374 Servic… Mounta…
+##  7 ALPHABET INC 2006  4011297 18473351   3077446 933594     7374 Servic… Mounta…
+##  8 ALPHABET INC 2007  5675183 25302587   4203720 1470260    7374 Servic… Mounta…
+##  9 ALPHABET INC 2008  5853596 31767575   4226858 1626738    7374 Servic… Mounta…
+## 10 ALPHABET INC 2009  8381189 40234167   6520448 1860741    7374 Servic… Mounta…
+## # … with abbreviated variable names ¹​total_assets, ²​net_income, ³​income_taxes,
+## #   ⁴​primary_sic_code, ⁵​sic_descr, ⁶​headquarters</code></pre>
+<pre class="r"><code># The last ten observations:
+tail(final_data_set, 10)</code></pre>
+<pre><code>## # A tibble: 10 × 9
+##    company_name  Year  ebit     total_…¹ net_i…² incom…³ prima…⁴ sic_d…⁵ headq…⁶
+##    &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
+##  1 ALIBABA GROUP 2010  -42330   6110081  -117469 26511      5961 Retail… Hangzh…
+##  2 ALIBABA GROUP 2011  289590   5776618  176681  48837      5961 Retail… Hangzh…
+##  3 ALIBABA GROUP 2012  877800   7619210  662739  131983     5961 Retail… Hangzh…
+##  4 ALIBABA GROUP 2013  1860326  10398346 1355758 231984     5961 Retail… Hangzh…
+##  5 ALIBABA GROUP 2014  4736080  18018857 3802976 522004     5961 Retail… Hangzh…
+##  6 ALIBABA GROUP 2015  5661617  41239915 3913547 1035605    5961 Retail… Hangzh…
+##  7 ALIBABA GROUP 2016  13118520 56533570 112385… 1328775    5961 Retail… Hangzh…
+##  8 ALIBABA GROUP 2017  9300291  73542172 6478313 2043385    5961 Retail… Hangzh…
+##  9 ALIBABA GROUP 2018  15785613 1139588… 9714843 2763156    5961 Retail… Hangzh…
+## 10 ALIBABA GROUP 2019  15073731 1434168… 130208… 2460433    5961 Retail… Hangzh…
+## # … with abbreviated variable names ¹​total_assets, ²​net_income, ³​income_taxes,
+## #   ⁴​primary_sic_code, ⁵​sic_descr, ⁶​headquarters</code></pre>
 </div>
 </div>
 
