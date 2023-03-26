@@ -657,6 +657,33 @@ head(company_info, 10)</code></pre>
 <p><br />
 </p>
 </div>
+<div id="exercise-8" class="section level5">
+<h5><strong>9. Exercise:</strong></h5>
+<p>Make the changes to company_info$company_name that are needed so that
+the company names can serve as keys.<br />
+</p>
+<pre class="r"><code># Make the letters of the company names capital:
+company_info$company_name &lt;- toupper(company_info$company_name)
+
+# Take a look at the new format:
+head(company_info, 10)</code></pre>
+<pre><code>## # A tibble: 10 × 4
+##    company_name       primary_sic_code sic_descr                         headq…¹
+##    &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;                             &lt;chr&gt;  
+##  1 ALPHABET INC                   7374 Services-Computer Processing &amp; D… Mounta…
+##  2 APPLE INC                      3571 Electronic Computers              Cupert…
+##  3 FACEBOOK INC                   7374 Services-Computer Processing &amp; D… Menlo …
+##  4 AMAZON.COM INC                 5961 Retail-Catalog &amp; Mail-Order Hous… Seattl…
+##  5 AT&amp;T INC                       4813 Telephone Communications (No Rad… Dallas…
+##  6 ORACLE CORPORATION             7371 Services-Computer Programming Se… Redwoo…
+##  7 SPOTIFY TECHNO                 7374 Services-Computer Processing &amp; D… Luxemb…
+##  8 TWITTER INC                    7374 Services-Computer Processing &amp; D… San Fr…
+##  9 NETFLIX INC                    7374 Services-Computer Processing &amp; D… Los Ga…
+## 10 ALIBABA GROUP                  5961 Retail-Catalog &amp; Mail-Order Hous… Hangzh…
+## # … with abbreviated variable name ¹​headquarters</code></pre>
+<p><br />
+</p>
+</div>
 </div>
 
 

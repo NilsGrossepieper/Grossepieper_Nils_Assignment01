@@ -221,6 +221,21 @@ head(annual_finances, 10)
 \
 
 
+##### __9. Exercise:__
+
+Make the changes to company_info$company_name that are needed so that the company names can
+serve as keys. \
+
+```{r}
+# Make the letters of the company names capital:
+company_info$company_name <- toupper(company_info$company_name)
+
+# Take a look at the new format:
+head(company_info, 10)
+
+```
+\
+
 
 
 
