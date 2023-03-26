@@ -250,6 +250,21 @@ final_data_set <- left_join(annual_finances, company_info, by = "company_name")
 \
 
 
+##### __11. Exercise:__
+
+Print the first ten and the last ten observations of the joined data set. \
+
+```{r}
+# The first ten observations:
+head(final_data_set, 10)
+
+# The last ten observations:
+tail(final_data_set, 10)
+
+```
+
+
+
 
 
 
