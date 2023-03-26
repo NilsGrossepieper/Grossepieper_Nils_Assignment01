@@ -5,13 +5,62 @@ date: "2023-03-26"
 output: html_document
 ---
 
-### *Assignment I: Importing, cleaning and merging*
+### __Assignment I: Importing, cleaning and merging__
 \
 
-##### 0. Preparations:
+##### __0. Preparations:__
 
 In the first step I have to load all the important packages for this assignment.
 All necessary packages have already been downloaded on my PC.\
 In the next step I set up the working directory.\
 In the third step I import the data files and name them according to the set up 
 descriptions.\
+
+```{r, warning=FALSE, message=FALSE}
+# 1. load the important packages
+library(tidyverse)
+library(readxl)
+
+# 2. set up the working directory
+setwd("C:/Users/gross/OneDrive/Dokumente/Grossepieper_Nils_Assignment01")
+
+# 3. import the data files
+financials_annual <- read_excel("data/financials_annual.xlsx", na = c("", "NA"), sheet = 1)
+company_codes <- read_excel("data/financials_annual.xlsx", na = c("", "NA"), sheet = 2)
+item_codes <- read_excel("data/financials_annual.xlsx", na = c("", "NA"), sheet = 3)
+```
+\
+
+##### __1. Exercise:__
+
+Read the article Tidy Data (Wickham, 20171). According to Wickham’s definition of “tidy data”, describe
+what is problematic about the data set financials_annual and why.
+\
+
+##### __Answer:__
+
+The data set "financials_annual" has the following problems which contradicts
+with the concept of tidy data: \
+
+1.) We do not have the case that every variable is placed in its own column,
+sine we have twenty columns for the same variable. \
+
+2.) We also do not have the case that every observation is placed in its own
+row, since we have observations for twenty separate years in one row. \
+
+3.) At least the condition that every value is placed in its own cell is 
+fulfilled. \
+
+At the end we can say that the data set financials_annual does only fulfill 
+one of the tidy data conditions, which means that this data set is not in the
+tidy data format. \
+
+
+
+
+
+
+
+
+
+

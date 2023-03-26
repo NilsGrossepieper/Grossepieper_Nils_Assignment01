@@ -358,17 +358,57 @@ display: none;
 
 
 <div id="assignment-i-importing-cleaning-and-merging" class="section level3">
-<h3><em>Assignment I: Importing, cleaning and merging</em></h3>
+<h3><strong>Assignment I: Importing, cleaning and merging</strong></h3>
 <p><br />
 </p>
 <div id="preparations" class="section level5">
-<h5>0. Preparations:</h5>
+<h5><strong>0. Preparations:</strong></h5>
 <p>In the first step I have to load all the important packages for this
 assignment. All necessary packages have already been downloaded on my
 PC.<br />
 In the next step I set up the working directory.<br />
 In the third step I import the data files and name them according to the
 set up descriptions.<br />
+</p>
+<pre class="r"><code># 1. load the important packages
+library(tidyverse)
+library(readxl)
+
+# 2. set up the working directory
+setwd(&quot;C:/Users/gross/OneDrive/Dokumente/Grossepieper_Nils_Assignment01&quot;)
+
+# 3. import the data files
+financials_annual &lt;- read_excel(&quot;data/financials_annual.xlsx&quot;, na = c(&quot;&quot;, &quot;NA&quot;), sheet = 1)
+company_codes &lt;- read_excel(&quot;data/financials_annual.xlsx&quot;, na = c(&quot;&quot;, &quot;NA&quot;), sheet = 2)
+item_codes &lt;- read_excel(&quot;data/financials_annual.xlsx&quot;, na = c(&quot;&quot;, &quot;NA&quot;), sheet = 3)</code></pre>
+<p><br />
+</p>
+</div>
+<div id="exercise" class="section level5">
+<h5><strong>1. Exercise:</strong></h5>
+<p>Read the article Tidy Data (Wickham, 20171). According to Wickham’s
+definition of “tidy data”, describe what is problematic about the data
+set financials_annual and why.<br />
+</p>
+</div>
+<div id="answer" class="section level5">
+<h5><strong>Answer:</strong></h5>
+<p>The data set “financials_annual” has the following problems which
+contradicts with the concept of tidy data:<br />
+</p>
+<p>1.) We do not have the case that every variable is placed in its own
+column, sine we have twenty columns for the same variable.<br />
+</p>
+<p>2.) We also do not have the case that every observation is placed in
+its own row, since we have observations for twenty separate years in one
+row.<br />
+</p>
+<p>3.) At least the condition that every value is placed in its own cell
+is fulfilled.<br />
+</p>
+<p>At the end we can say that the data set financials_annual does only
+fulfill one of the tidy data conditions, which means that this data set
+is not in the tidy data format.<br />
 </p>
 </div>
 </div>
