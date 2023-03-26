@@ -237,6 +237,19 @@ head(company_info, 10)
 \
 
 
+##### __10. Exercise:__
+
+Join the two data sets such that all observations in the financial data are kept and the additional
+information from company_info is appended \
+
+```{r}
+# Now I join the two data sets:
+final_data_set <- left_join(annual_finances, company_info, by = "company_name")
+
+```
+\
+
+
 
 
 
