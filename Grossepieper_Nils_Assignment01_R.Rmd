@@ -153,12 +153,41 @@ head(annual_finances, 10)
 \
 
 
+##### __5. Exercise:__
+
+Before you proceed, check if …\
+… each variable is placed in its own column.\
+… each observation is placed in its own row.\
+… each value is placed in its own cell.\
+… each variable has an adequate variable type.\
+… missing values are correctly identified as such.\
+… the the order of observations is reasonable.\
+
+##### __Answer:__
+
+Each variable is placed in its own column. \
+Each observation is placed in its own row. \
+Each value is placed in its own cell. \
+Each variable is in an adequate type. \
+Missing values are identified. \
+The order of observations is reasonable. \
+\
+
+
+##### __6. Exercise:__
+
+The .csv-file company_info.csv contains additional information on the ten companies from a different
+source. Read the file into your environment as a data frame named company_info. \
 
 
 
 
 
-d
+
+
+
+
+
 
 
 
