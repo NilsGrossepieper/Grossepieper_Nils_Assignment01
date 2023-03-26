@@ -43,16 +43,16 @@ what is problematic about the data set financials_annual and why.
 The data set "financials_annual" has the following problems which contradicts
 with the concept of tidy data: \
 
-1.) We do not have the case that every variable is placed in its own column,
-sine we have twenty columns for the same variable. \
+1.) I do not have the case that every variable is placed in its own column,
+sine I have twenty columns for the same variable. \
 
-2.) We also do not have the case that every observation is placed in its own
-row, since we have observations for twenty separate years in one row. \
+2.) I also do not have the case that every observation is placed in its own
+row, since I have observations for twenty separate years in one row. \
 
 3.) At least the condition that every value is placed in its own cell is 
 fulfilled. \
 
-At the end we can say that the data set financials_annual does only fulfill 
+At the end I can say that the data set financials_annual does only fulfill 
 one of the tidy data conditions, which means that this data set is not in the
 tidy data format. \
 \
@@ -62,26 +62,68 @@ tidy data format. \
 
 Make the transformations needed so that the data can be described as “tidy” \
 
-```{r, results='hide'}
-# take a look at the data set:
+```{r}
+# Have a look at the data set:
+head(financials_annual, 10)
+```
+
+```{r, results='hide', warning=FALSE}
+# Take a look at the data set:
 glimpse(financials_annual)
 
-# transform every column to a column with characters:
+# Transform every column to a column with characters:
 string_vec <- c("2013", "2014", "2018", "2019")
 financials_annual <- financials_annual %>% mutate(across(string_vec, as.character))
 
-# check whether the transformation was successful:
+# Check whether the transformation was successful:
 glimpse(financials_annual)
 
-# now we need to transform the data in the long format:
+# Now I need to transform the data in the long format:
 financials_annual_tidy <- financials_annual %>%
   pivot_longer(cols = "2000":"2019", names_to = "Year", values_to = "Finance")
 
-# have a look at the new tidy data:
+
+```
+```{r}
+# Have a look at the new tidy data set:
 head(financials_annual_tidy, 10)
+```
+\
+
+
+
+##### __3. Exercise:__
+
+Merge the company_name (given in the data frame company_codes) to the financial data. \
+
+```{r}
+# I have to do a string split to bring the observations of the variable "Code"
+# in the right format so they can merge with the other data set:
+financials_annual_tidy <- financials_annual_tidy %>%
+  mutate(company_code = Code %>% str_sub(, end = -10))
+
+# In advanced I can also bring the "item_code" in the right format:
+financials_annual_tidy <- financials_annual_tidy %>%
+  mutate(item_code = Code %>% str_sub(start = -8, ))
+financials_annual_tidy$item_code <- gsub(")", "", financials_annual_tidy$item_code)
+
+# Merge the two data sets "financial_annual_tidy" and "company_codes":
+financials_annual_merge <- left_join(financials_annual_tidy, company_codes,
+                                     by = "company_code")
+
+# Have a look at the new data set:
+head(financials_annual_merge, 10)
 
 ```
 \
+
+
+
+
+
+
+
+
 
 
 

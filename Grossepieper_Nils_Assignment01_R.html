@@ -396,17 +396,17 @@ set financials_annual and why.<br />
 <p>The data set “financials_annual” has the following problems which
 contradicts with the concept of tidy data:<br />
 </p>
-<p>1.) We do not have the case that every variable is placed in its own
-column, sine we have twenty columns for the same variable.<br />
+<p>1.) I do not have the case that every variable is placed in its own
+column, sine I have twenty columns for the same variable.<br />
 </p>
-<p>2.) We also do not have the case that every observation is placed in
-its own row, since we have observations for twenty separate years in one
+<p>2.) I also do not have the case that every observation is placed in
+its own row, since I have observations for twenty separate years in one
 row.<br />
 </p>
 <p>3.) At least the condition that every value is placed in its own cell
 is fulfilled.<br />
 </p>
-<p>At the end we can say that the data set financials_annual does only
+<p>At the end I can say that the data set financials_annual does only
 fulfill one of the tidy data conditions, which means that this data set
 is not in the tidy data format.<br />
 <br />
@@ -415,7 +415,93 @@ is not in the tidy data format.<br />
 <div id="exercise-1" class="section level5">
 <h5><strong>2. Exercise:</strong></h5>
 <p>Make the transformations needed so that the data can be described as
-“tidy”</p>
+“tidy”<br />
+</p>
+<pre class="r"><code># Have a look at the data set:
+head(financials_annual, 10)</code></pre>
+<pre><code>## # A tibble: 10 × 21
+##    Code    `2000` `2001` `2002` `2003` `2004` `2005` `2006` `2007` `2008` `2009`
+##    &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt; 
+##  1 @GOOGL… &lt;NA&gt;   11826  187485 348585 651096 21424… 40112… 56751… 58535… 83811…
+##  2 @GOOGL… &lt;NA&gt;   84457  291192 23065… 33017… 10271… 18473… 25302… 31767… 40234…
+##  3 @GOOGL… &lt;NA&gt;   6985   99656  105648 399119 14653… 30774… 42037… 42268… 65204…
+##  4 @GOOGL… &lt;NA&gt;   3083   85259  241006 251115 676280 933594 14702… 16267… 18607…
+##  5 @AAPL(… 11130… -36000 98000  100000 386000 18150… 28180… 50080… 68950… 12066…
+##  6 @AAPL(… 68030… 60210… 62280… 67550… 79640… 11368… 17205… 25259… 39434… 47338…
+##  7 @AAPL(… 786000 -25000 65000  69000  276000 13350… 19890… 34960… 48340… 82350…
+##  8 @AAPL(… 306000 -15000 22000  24000  107000 480000 829000 15120… 20610… 38310…
+##  9 @FB(WC… &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   264000
+## 10 @FB(WC… &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;  
+## # … with 10 more variables: `2010` &lt;chr&gt;, `2011` &lt;chr&gt;, `2012` &lt;chr&gt;,
+## #   `2013` &lt;dbl&gt;, `2014` &lt;dbl&gt;, `2015` &lt;chr&gt;, `2016` &lt;chr&gt;, `2017` &lt;chr&gt;,
+## #   `2018` &lt;dbl&gt;, `2019` &lt;dbl&gt;</code></pre>
+<pre class="r"><code># Take a look at the data set:
+glimpse(financials_annual)
+
+# Transform every column to a column with characters:
+string_vec &lt;- c(&quot;2013&quot;, &quot;2014&quot;, &quot;2018&quot;, &quot;2019&quot;)
+financials_annual &lt;- financials_annual %&gt;% mutate(across(string_vec, as.character))
+
+# Check whether the transformation was successful:
+glimpse(financials_annual)
+
+# Now I need to transform the data in the long format:
+financials_annual_tidy &lt;- financials_annual %&gt;%
+  pivot_longer(cols = &quot;2000&quot;:&quot;2019&quot;, names_to = &quot;Year&quot;, values_to = &quot;Finance&quot;)</code></pre>
+<pre class="r"><code># Have a look at the new tidy data set:
+head(financials_annual_tidy, 10)</code></pre>
+<pre><code>## # A tibble: 10 × 3
+##    Code            Year  Finance
+##    &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;  
+##  1 @GOOGL(WC18191) 2000  &lt;NA&gt;   
+##  2 @GOOGL(WC18191) 2001  11826  
+##  3 @GOOGL(WC18191) 2002  187485 
+##  4 @GOOGL(WC18191) 2003  348585 
+##  5 @GOOGL(WC18191) 2004  651096 
+##  6 @GOOGL(WC18191) 2005  2142453
+##  7 @GOOGL(WC18191) 2006  4011297
+##  8 @GOOGL(WC18191) 2007  5675183
+##  9 @GOOGL(WC18191) 2008  5853596
+## 10 @GOOGL(WC18191) 2009  8381189</code></pre>
+<p><br />
+</p>
+</div>
+<div id="exercise-2" class="section level5">
+<h5><strong>3. Exercise:</strong></h5>
+<p>Merge the company_name (given in the data frame company_codes) to the
+financial data.<br />
+</p>
+<pre class="r"><code># I have to do a string split to bring the observations of the variable &quot;Code&quot;
+# in the right format so they can merge with the other data set:
+financials_annual_tidy &lt;- financials_annual_tidy %&gt;%
+  mutate(company_code = Code %&gt;% str_sub(, end = -10))
+
+# In advanced I can also bring the &quot;item_code&quot; in the right format:
+financials_annual_tidy &lt;- financials_annual_tidy %&gt;%
+  mutate(item_code = Code %&gt;% str_sub(start = -8, ))
+financials_annual_tidy$item_code &lt;- gsub(&quot;)&quot;, &quot;&quot;, financials_annual_tidy$item_code)
+
+# Merge the two data sets &quot;financial_annual_tidy&quot; and &quot;company_codes&quot;:
+financials_annual_merge &lt;- left_join(financials_annual_tidy, company_codes,
+                                     by = &quot;company_code&quot;)
+
+# Have a look at the new data set:
+head(financials_annual_merge, 10)</code></pre>
+<pre><code>## # A tibble: 10 × 6
+##    Code            Year  Finance company_code item_code company_name
+##    &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;       
+##  1 @GOOGL(WC18191) 2000  &lt;NA&gt;    @GOOGL       WC18191   ALPHABET INC
+##  2 @GOOGL(WC18191) 2001  11826   @GOOGL       WC18191   ALPHABET INC
+##  3 @GOOGL(WC18191) 2002  187485  @GOOGL       WC18191   ALPHABET INC
+##  4 @GOOGL(WC18191) 2003  348585  @GOOGL       WC18191   ALPHABET INC
+##  5 @GOOGL(WC18191) 2004  651096  @GOOGL       WC18191   ALPHABET INC
+##  6 @GOOGL(WC18191) 2005  2142453 @GOOGL       WC18191   ALPHABET INC
+##  7 @GOOGL(WC18191) 2006  4011297 @GOOGL       WC18191   ALPHABET INC
+##  8 @GOOGL(WC18191) 2007  5675183 @GOOGL       WC18191   ALPHABET INC
+##  9 @GOOGL(WC18191) 2008  5853596 @GOOGL       WC18191   ALPHABET INC
+## 10 @GOOGL(WC18191) 2009  8381189 @GOOGL       WC18191   ALPHABET INC</code></pre>
+<p><br />
+</p>
 </div>
 </div>
 
