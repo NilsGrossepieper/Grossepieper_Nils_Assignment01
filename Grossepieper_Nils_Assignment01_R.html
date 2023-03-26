@@ -503,6 +503,65 @@ head(financials_annual_merge, 10)</code></pre>
 <p><br />
 </p>
 </div>
+<div id="exercise-3" class="section level5">
+<h5><strong>4. Exercise:</strong></h5>
+<p>The variable names (i.e., column names) should be given by the item
+descriptions item_descr (given in the data frame item_codes), not by the
+item_code.<br />
+</p>
+<pre class="r"><code># Merge the two data sets &quot;financial_annual_merge&quot; and &quot;item_codes&quot;:
+financials_annual_final &lt;- left_join(financials_annual_merge, item_codes,
+                                     by = &quot;item_code&quot;)
+
+# Have a look at the new data set:
+head(financials_annual_final, 10)</code></pre>
+<pre><code>## # A tibble: 10 × 7
+##    Code            Year  Finance company_code item_code company_name item_descr
+##    &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;     
+##  1 @GOOGL(WC18191) 2000  &lt;NA&gt;    @GOOGL       WC18191   ALPHABET INC ebit      
+##  2 @GOOGL(WC18191) 2001  11826   @GOOGL       WC18191   ALPHABET INC ebit      
+##  3 @GOOGL(WC18191) 2002  187485  @GOOGL       WC18191   ALPHABET INC ebit      
+##  4 @GOOGL(WC18191) 2003  348585  @GOOGL       WC18191   ALPHABET INC ebit      
+##  5 @GOOGL(WC18191) 2004  651096  @GOOGL       WC18191   ALPHABET INC ebit      
+##  6 @GOOGL(WC18191) 2005  2142453 @GOOGL       WC18191   ALPHABET INC ebit      
+##  7 @GOOGL(WC18191) 2006  4011297 @GOOGL       WC18191   ALPHABET INC ebit      
+##  8 @GOOGL(WC18191) 2007  5675183 @GOOGL       WC18191   ALPHABET INC ebit      
+##  9 @GOOGL(WC18191) 2008  5853596 @GOOGL       WC18191   ALPHABET INC ebit      
+## 10 @GOOGL(WC18191) 2009  8381189 @GOOGL       WC18191   ALPHABET INC ebit</code></pre>
+<pre class="r"><code># Now I can delete some variables that I do  not need anymore to make my data
+# set more clear:
+financials_annual_final$Code &lt;- NULL
+financials_annual_final$company_code &lt;- NULL
+financials_annual_final$item_code &lt;- NULL
+
+# Reorder the columns in a clearer way:
+financials_annual_final &lt;- financials_annual_final %&gt;%
+  select(company_name, Year, Finance, item_descr)
+
+# I want the item descriptions as columns so I have to transform the data set
+# into the long format:
+annual_finances &lt;- financials_annual_final %&gt;%
+  pivot_wider(id_cols = c(company_name, Year), names_from = item_descr, 
+              values_from = Finance)
+
+# Have a look at the new data set:
+head(annual_finances, 10)</code></pre>
+<pre><code>## # A tibble: 10 × 6
+##    company_name Year  ebit    total_assets net_income income_taxes
+##    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;       
+##  1 ALPHABET INC 2000  &lt;NA&gt;    &lt;NA&gt;         &lt;NA&gt;       &lt;NA&gt;        
+##  2 ALPHABET INC 2001  11826   84457        6985       3083        
+##  3 ALPHABET INC 2002  187485  291192       99656      85259       
+##  4 ALPHABET INC 2003  348585  2306507      105648     241006      
+##  5 ALPHABET INC 2004  651096  3301761      399119     251115      
+##  6 ALPHABET INC 2005  2142453 10271813     1465397    676280      
+##  7 ALPHABET INC 2006  4011297 18473351     3077446    933594      
+##  8 ALPHABET INC 2007  5675183 25302587     4203720    1470260     
+##  9 ALPHABET INC 2008  5853596 31767575     4226858    1626738     
+## 10 ALPHABET INC 2009  8381189 40234167     6520448    1860741</code></pre>
+<p><br />
+</p>
+</div>
 </div>
 
 

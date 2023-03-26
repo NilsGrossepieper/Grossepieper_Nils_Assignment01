@@ -91,7 +91,6 @@ head(financials_annual_tidy, 10)
 \
 
 
-
 ##### __3. Exercise:__
 
 Merge the company_name (given in the data frame company_codes) to the financial data. \
@@ -118,8 +117,48 @@ head(financials_annual_merge, 10)
 \
 
 
+##### __4. Exercise:__
+
+The variable names (i.e., column names) should be given by the item descriptions item_descr (given
+in the data frame item_codes), not by the item_code. \
+
+```{r}
+# Merge the two data sets "financial_annual_merge" and "item_codes":
+financials_annual_final <- left_join(financials_annual_merge, item_codes,
+                                     by = "item_code")
+
+# Have a look at the new data set:
+head(financials_annual_final, 10)
+
+# Now I can delete some variables that I do  not need anymore to make my data
+# set more clear:
+financials_annual_final$Code <- NULL
+financials_annual_final$company_code <- NULL
+financials_annual_final$item_code <- NULL
+
+# Reorder the columns in a clearer way:
+financials_annual_final <- financials_annual_final %>%
+  select(company_name, Year, Finance, item_descr)
+
+# I want the item descriptions as columns so I have to transform the data set
+# into the long format:
+annual_finances <- financials_annual_final %>%
+  pivot_wider(id_cols = c(company_name, Year), names_from = item_descr, 
+              values_from = Finance)
+
+# Have a look at the new data set:
+head(annual_finances, 10)
+
+```
+\
 
 
+
+
+
+
+
+d
 
 
 
