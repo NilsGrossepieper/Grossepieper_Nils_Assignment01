@@ -1,0 +1,12 @@
+This file was assembled on September 2, 2020. SIC codes classify industries by a four-digit code.
+"company_name";"primary_sic_code";"sic_descr";"headquarters"
+"alphabet inc";7374;"Services-Computer Processing & Data Preparation";"Mountain View, CA"
+"apple inc";3571;"Electronic Computers";"Cupertino, CA"
+"facebook inc";7374;"Services-Computer Processing & Data Preparation";"Menlo Park, CA"
+"amazon.com inc";5961;"Retail-Catalog & Mail-Order Houses";"Seattle, WA"
+"at&t inc";4813;"Telephone Communications (No Radiotelephone)";"Dallas, TX"
+"oracle corporation";7371;"Services-Computer Programming Services";"Redwood City, CA"
+"spotify techno";7374;"Services-Computer Processing & Data Preparation";"Luxembourg, LUX"
+"twitter inc";7374;"Services-Computer Processing & Data Preparation";"San Francisco, CA"
+"netflix inc";7374;"Services-Computer Processing & Data Preparation";"Los Gatos, CA"
+"alibaba group";5961;"Retail-Catalog & Mail-Order Houses";"Hangzhou, CHN"
