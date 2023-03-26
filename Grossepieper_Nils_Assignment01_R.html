@@ -617,6 +617,46 @@ Also the last condition is fulfilled.<br />
 </li>
 </ol>
 </div>
+<div id="exercise-7" class="section level5">
+<h5><strong>8. Exercise:</strong></h5>
+<p>Compare the company names given in company_info with the ones you
+have in the tidy financial data. What do you notice?<br />
+</p>
+<pre class="r"><code># Take a look at the two data sets:
+head(company_info, 10)</code></pre>
+<pre><code>## # A tibble: 10 × 4
+##    company_name       primary_sic_code sic_descr                         headq…¹
+##    &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;                             &lt;chr&gt;  
+##  1 alphabet inc                   7374 Services-Computer Processing &amp; D… Mounta…
+##  2 apple inc                      3571 Electronic Computers              Cupert…
+##  3 facebook inc                   7374 Services-Computer Processing &amp; D… Menlo …
+##  4 amazon.com inc                 5961 Retail-Catalog &amp; Mail-Order Hous… Seattl…
+##  5 at&amp;t inc                       4813 Telephone Communications (No Rad… Dallas…
+##  6 oracle corporation             7371 Services-Computer Programming Se… Redwoo…
+##  7 spotify techno                 7374 Services-Computer Processing &amp; D… Luxemb…
+##  8 twitter inc                    7374 Services-Computer Processing &amp; D… San Fr…
+##  9 netflix inc                    7374 Services-Computer Processing &amp; D… Los Ga…
+## 10 alibaba group                  5961 Retail-Catalog &amp; Mail-Order Hous… Hangzh…
+## # … with abbreviated variable name ¹​headquarters</code></pre>
+<pre class="r"><code>head(annual_finances, 10)</code></pre>
+<pre><code>## # A tibble: 10 × 6
+##    company_name Year  ebit    total_assets net_income income_taxes
+##    &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;       
+##  1 ALPHABET INC 2000  &lt;NA&gt;    &lt;NA&gt;         &lt;NA&gt;       &lt;NA&gt;        
+##  2 ALPHABET INC 2001  11826   84457        6985       3083        
+##  3 ALPHABET INC 2002  187485  291192       99656      85259       
+##  4 ALPHABET INC 2003  348585  2306507      105648     241006      
+##  5 ALPHABET INC 2004  651096  3301761      399119     251115      
+##  6 ALPHABET INC 2005  2142453 10271813     1465397    676280      
+##  7 ALPHABET INC 2006  4011297 18473351     3077446    933594      
+##  8 ALPHABET INC 2007  5675183 25302587     4203720    1470260     
+##  9 ALPHABET INC 2008  5853596 31767575     4226858    1626738     
+## 10 ALPHABET INC 2009  8381189 40234167     6520448    1860741</code></pre>
+<pre class="r"><code># The company names in our original data sets are all capital letters, while in 
+# the data set &quot;company_info&quot;  the company names are written with small letters</code></pre>
+<p><br />
+</p>
+</div>
 </div>
 
 

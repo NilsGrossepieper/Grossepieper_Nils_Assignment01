@@ -204,6 +204,22 @@ Also the last condition is fulfilled. \
 \
 
 
+##### __8. Exercise:__
+
+Compare the company names given in company_info with the ones you have in the tidy financial data.
+What do you notice? \
+
+```{r}
+# Take a look at the two data sets:
+head(company_info, 10)
+head(annual_finances, 10)
+
+# The company names in our original data sets are all capital letters, while in 
+# the data set "company_info"  the company names are written with small letters
+
+```
+\
+
 
 
 
