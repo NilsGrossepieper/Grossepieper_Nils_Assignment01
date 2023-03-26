@@ -31,6 +31,7 @@ item_codes <- read_excel("data/financials_annual.xlsx", na = c("", "NA"), sheet 
 ```
 \
 
+
 ##### __1. Exercise:__
 
 Read the article Tidy Data (Wickham, 20171). According to Wickham’s definition of “tidy data”, describe
@@ -54,6 +55,41 @@ fulfilled. \
 At the end we can say that the data set financials_annual does only fulfill 
 one of the tidy data conditions, which means that this data set is not in the
 tidy data format. \
+\
+
+
+##### __2. Exercise:__
+
+Make the transformations needed so that the data can be described as “tidy” \
+
+```{r, results='hide'}
+# take a look at the data set:
+glimpse(financials_annual)
+
+# transform every column to a column with characters:
+string_vec <- c("2013", "2014", "2018", "2019")
+financials_annual <- financials_annual %>% mutate(across(string_vec, as.character))
+
+# check whether the transformation was successful:
+glimpse(financials_annual)
+
+# now we need to transform the data in the long format:
+financials_annual_tidy <- financials_annual %>%
+  pivot_longer(cols = "2000":"2019", names_to = "Year", values_to = "Finance")
+
+# have a look at the new tidy data:
+head(financials_annual_tidy, 10)
+
+```
+\
+
+
+
+
+
+
+
+
 
 
 
